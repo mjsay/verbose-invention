@@ -1,0 +1,79 @@
+#include <iostream>
+#include <stdio.h>
+#include <cmath>
+#include <iomanip>
+using namespace std;
+
+int main()
+{
+    double years = 0;
+    double bal = 0;
+    double rate = 0;
+    double r = 0;
+    double i = 0;
+    double n = 0;
+    double rates = 0;
+    double interestBank = 0;
+    double unPaidBalance = 0;
+    double principal = 0;
+    int control = 1;
+    double  sumInterest = 0;
+    
+    cout << "Balance Due: $";
+    cin >> bal;
+    
+    cout << "Interest Rate: ";
+    cin >> rate;
+    
+    cout << "Years: ";
+    cin >> years;
+    
+    //Formula fir payment it
+    // R = Pi / 1-(1-i)^-n
+    
+    r = (rate/100);
+    i = r/12;
+    n = years * 12;
+    
+    // Rate of each months is ...
+    rates = (bal * i) / (1-pow(1+i,-n));
+
+    
+    //Display to look nice ...
+    cout << setprecision(2);
+    cout << fixed;
+    cout << setw(5) << "Month |" << setw(10) << "Payment |" << setw(10) << "Interest |";
+    cout << setw(10) << "Principal |" << setw(5) << "Balance " << endl;
+    cout << "============================================" << endl;
+    
+    while (control <= n)
+    {
+        // Interest (Bank pay)...
+        interestBank = bal * i;
+        
+        //Total Sum Interest...
+        sumInterest += interestBank;
+    
+        // Principal Paying off Balance...
+        principal = rates - interestBank;
+    
+        //Balance remaining ...
+        unPaidBalance = bal - principal;
+        
+        cout << setw(3) << control << setw(11) << rates << setw(9);
+        cout << interestBank << setw(10) << principal << setw(13);
+        cout << unPaidBalance << endl;
+        
+        control ++;
+        
+        bal = unPaidBalance;
+    }
+    
+    
+    cout << "\nTotal Interest: $" << sumInterest;
+    
+}
+
+
+
+
